@@ -4,11 +4,19 @@ import cors from "cors";
 dotevn.config();
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // middlewares
 // for solving the cors error
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : "https://demo-client-pearl.vercel.app",
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("this is our homepage");
