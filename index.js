@@ -1,9 +1,14 @@
 import express from "express";
 import dotevn from "dotenv";
+import cors from "cors";
 dotevn.config();
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+// middlewares
+// for solving the cors error
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("this is our homepage");
@@ -17,7 +22,7 @@ app.get("/contact", (req, res) => {
   res.send("this is our contact");
 });
 
-app.get("/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   const users = [
     {
       id: 1,
